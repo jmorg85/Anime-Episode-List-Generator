@@ -1,0 +1,18 @@
+{
+	"name": "Anime Episode List Plugin",
+	"version": "0.0.1",
+	"description": "This plugin is meant for users to type in an anime name and have a list of episodes appear for it.",
+	"manifest_version": 2,
+	"browser_action": {
+		"default_popup": "./index.html",
+		"default_title": "View the episode list of all your favorite shows.",
+		"default_icon": "./list_icon.png"
+	},
+
+	"content_scripts": [
+		{
+			"js": ["myScript.js"],
+			"matches": ["http://*/*"]
+		}
+	]
+}

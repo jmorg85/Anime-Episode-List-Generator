@@ -1,24 +1,27 @@
-var api_url = '';
+var api_url = ''; //url that will be used in the JSON get request
 
-async function getData(){
-    var inputValue = document.getElementById("anime").value;
+document.getElementById("search_button").addEventListener("click", getData); // For some reason, when I lift my mouse over the button, it fires the event twice
+
+async function getData(data = {}){
+    var inputValue = document.getElementById("anime").value; // The name of the anime that was put into the search bar
     var anime_name = "";
 
     clearTable();
 
-    anime_name = addPerctents(inputValue);
+    anime_name = addPerctents(inputValue); //While using the API, if an anime title has any spaces between words there needs to be a %20 in that space
 
     api_url = 'https://api.jikan.moe/v3/search/anime?q=' + anime_name + '&page=1';
 
     const response = fetch(api_url)
     .then(response => response.json())
+
     .then(data => {
         console.log(data);
 
-        for(var i = 10; i>-1; i--)
+        /*for(var i = 10; i>-1; i--)
         {
             displayInfo(data.results[i].title, data.results[i].image_url, data.results[i].synopsis, data.results[i].mal_id);
-        }
+        }*/
     })
 }
 
