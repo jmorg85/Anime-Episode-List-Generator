@@ -13,15 +13,17 @@ async function getData(data = {}){
     api_url = 'https://api.jikan.moe/v3/search/anime?q=' + anime_name + '&page=1';
 
     const response = fetch(api_url)
-    .then(response => response.json())
+    .then(response => {
+        return response.json();
+    })
 
     .then(data => {
         console.log(data);
 
-        /*for(var i = 10; i>-1; i--)
+        for(var i = 10; i>-1; i--)
         {
             displayInfo(data.results[i].title, data.results[i].image_url, data.results[i].synopsis, data.results[i].mal_id);
-        }*/
+        }
     })
 }
 
@@ -86,5 +88,12 @@ function displayInfo(anime_name, anime_cover_url, anime_synopsis, anime_id){
     var nameAndSynopsis = row_1.insertCell(1);
     
     animeImage.innerHTML = "<img src='" + anime_cover_url + "'>";
-    nameAndSynopsis.innerHTML = `<table style = "border: 1px solid black"><tr><td style="color:blue" onclick="getEpisodes('${anime_id}')"> ${anime_name}</td></tr><br><br><br><tr><td>${anime_synopsis}</td></tr></table>`;
+    nameAndSynopsis.innerHTML = `<table style = "border: 1px solid black"><tr><td style="color:blue" id="${anime_name}"> ${anime_name}</td></tr><br><br><br><tr><td>${anime_synopsis}</td></tr></table>`;
+
+    document.body.addEventListener("click", function(event)
+    {
+        if(event.srcElement.id == anime_name){
+            getEpisodes(anime_id);
+        }
+    })
 }
