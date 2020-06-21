@@ -1,8 +1,11 @@
 var api_url = ''; //url that will be used in the JSON get request
 
 document.getElementById("search_button").addEventListener("click", getData); // For some reason, when I lift my mouse over the button, it fires the event twice
+document.getElementById("loader").style.display = "none"; // Makes the progress bar not appear when not the extension is not in use.
 
 async function getData(data = {}){
+   document.getElementById("loader").style.display = "block";
+
     var inputValue = document.getElementById("anime").value; // The name of the anime that was put into the search bar
     var anime_name = "";
 
@@ -25,6 +28,8 @@ async function getData(data = {}){
             displayInfo(data.results[i].title, data.results[i].image_url, data.results[i].synopsis, data.results[i].mal_id);
         }
     })
+
+        document.getElementById("loader").style.display = "none";
 }
 
 function addPerctents(animeName){
@@ -55,8 +60,10 @@ function getEpisodes(animeId){
     const response_2 = fetch(epi_url)
     .then(response_2 => response_2.json())
     .then(data_2 => {
+        console.log(data_2);
         
         data_2.episodes.forEach(function(episodes){
+                console.log(episodes);
                 addRowsAndCells(episodes.episode_id, episodes.title);
             })
     })
