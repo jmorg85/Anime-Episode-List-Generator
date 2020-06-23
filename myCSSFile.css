@@ -2,6 +2,6 @@
     border-style:solid;
 }
 
-tr{
-    
+td{
+    border: 1px solid black;
 }
