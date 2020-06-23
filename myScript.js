@@ -57,6 +57,9 @@ function getEpisodes(animeId){
 
     clearTable();
 
+    //Clear table is fine, when I do the fetch, there are multiple sets of episodes.
+    //Turns out add event handler is the reason why there are multiple sets of episodes
+
     const response_2 = fetch(epi_url)
     .then(response_2 => response_2.json())
     .then(data_2 => {
@@ -79,8 +82,6 @@ function addRowsAndCells(episodeNumber, episodeName){
 }
 
 function clearTable(){
-    var tableRows = document.getElementById("table_2").getElementsByTagName('tr');
-    var rowNumbers = tableRows.length;
 
     for(var i = document.getElementById("table_2").rows.length;i>0;i--)
     {
